@@ -4,7 +4,7 @@ require 'json'
 module Sinja
   module Helpers
     module Relationships
-      def dispatch_relationship_request(id, path, **opts)
+      def dispatch_relationship_request(id, path, opts)
         path_info = request.path_info.dup
         path_info << "/#{id}" unless path_info.end_with?("/#{id}")
         path_info << "/relationships/#{path}"
