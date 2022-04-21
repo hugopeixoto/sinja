@@ -9,7 +9,7 @@ module Sinja
       app.def_action_helper(app, :update, :roles)
       app.def_action_helper(app, :destroy, :roles)
 
-      app.options '', :qcaptures=>{ :filter=>:id } do
+      app.options '', :qcaptures=>{ :filter=>:id }, :qparams=>%i[include fields] do
         allow :get=>:show
       end
 
@@ -38,7 +38,7 @@ module Sinja
         serialize_models(collection, opts)
       end
 
-      app.options '' do
+      app.options '', :qparams=>%i[include fields filter sort page] do
         allow :get=>:index, :post=>:create
       end
 
@@ -82,7 +82,7 @@ module Sinja
 
       pkre = app._resource_config[:route_opts][:pkre]
 
-      app.options %r{/#{pkre}} do
+      app.options %r{/#{pkre}}, :qparams=>%i[include fields] do
         allow :get=>:show, :patch=>:update, :delete=>:destroy
       end
 

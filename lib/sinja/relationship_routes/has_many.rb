@@ -9,7 +9,7 @@ module Sinja
         app.def_action_helper(app, :merge, %i[roles sideload_on])
         app.def_action_helper(app, :subtract, :roles)
 
-        app.options '' do
+        app.options '', :qparams=>%i[include fields filter sort page] do
           unless relationship_link?
             allow :get=>:fetch
           else
